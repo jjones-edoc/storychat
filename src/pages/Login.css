@@ -1,0 +1,88 @@
+form{
+    width:100%;
+    height:100%;    
+    color: rgb(16, 210, 126);
+}
+.pane img{
+    width: 100%;
+}
+.leftside h1{
+    font-size: 3rem;
+}
+h2{
+    text-align: center;
+    font-size: 3rem;
+    margin: 20px 0px;
+}
+.input-container{
+    display: flex;
+    flex-direction: column; 
+}
+.input{
+    width: 100%;
+    margin: 10px 0px;
+    background-color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+label{
+    font-size: 1.5rem;
+    width:100%;
+}
+label span{
+    margin-left:5px;
+}
+input{
+    background: transparent;
+    border: none;
+    outline: none;
+    font-size: 2rem;
+    padding:1rem;
+    margin-left:5px;
+    border-bottom: 1px solid rgb(16, 210, 126);
+}
+.login{
+    align-items: center;
+    text-align: center;
+    width: 100%;
+    height: 3rem;
+    margin-top: 20px;
+    background-color: rgb(16, 210, 126);
+    border-radius: .5rem;
+    color: white;
+    font-size: 18px;
+    cursor: pointer;
+}
+.login:hover{
+    background-color: rgb(16, 210, 126);
+    opacity: 75%;
+}
+p{
+    text-align: center;
+    padding: 10px 0px;
+    font-size: 20px;
+    margin: 10px 0px;
+}
+.social-items{
+    width: 50%;
+    border: 1px solid rgb(16, 210, 126);
+    border-radius: .5rem;
+    height: 3rem;
+    font-size: 2rem;
+}
+.social-items:hover{
+    background-color: rgb(16, 210, 126);
+    opacity: 75%;
+    color:#fff;
+}
+h6{
+    margin-top: 2rem;
+    font-size: 18px;
+    font-weight: normal;
+}
+span{
+    text-decoration: underline;
+    font-size: 20px;
+    cursor: pointer;
+}
