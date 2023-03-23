@@ -1,15 +1,15 @@
 import React, { useState } from 'react';
-import bg from '../img/bg.png';
+import bg from '../img/register.png';
 import './Login.css';
-const Login = () => {
+const Register = () => {
   return (
     <form className="contRow">
       <div className="pane smHide">
         <img src={bg} />
-        <h1>Welcome to Story Chat</h1>
+        <h1>Join Story Chat Today!</h1>
       </div>
       <div className="pane smShow">
-        <h2>LOGIN</h2>
+        <h2>REGISTER</h2>
         <div className="contCol">
           <div className="input">
             <i className="fa fa-user"></i>
@@ -20,14 +20,19 @@ const Login = () => {
             <input type="password" placeholder="Password" />
           </div>
           <div className="input">
-            <input type="submit" className="login" value="LOGIN" />
+            <input required style={{ display: 'none' }} type="file" id="file" />
+            <label htmlFor="file">
+              <i className="fa fa-image"></i>
+              <span>Add an avatar</span>
+            </label>
           </div>
-          <p>Or Login Using</p>
+          <input type="submit" className="login" value="REGISTER" />
+          <p>Or Register Using</p>
           <div className="social-items contRow cursor">
             <i className="fa fa-google"></i>oogle
           </div>
           <h6>
-            Not a member yet? <span>Register</span>
+            Already a Member? <span>Login</span>
           </h6>
         </div>
       </div>
@@ -35,4 +40,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default Register;
