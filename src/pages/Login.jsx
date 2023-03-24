@@ -1,9 +1,28 @@
-import React, { useState } from 'react';
-import bg from '../img/bg.png';
-import './Login.css';
+import React, { useState } from "react";
+import { useNavigate, Link } from "react-router-dom";
+import { signInWithEmailAndPassword } from "firebase/auth";
+import { auth } from "../firebase";
+import bg from "../img/bg.png";
+import "./Login.css";
+
 const Login = () => {
+  const [hasError, setError] = useState(false);
+  const navigate = useNavigate();
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const email = e.target[0].value;
+    const password = e.target[1].value;
+
+    try {
+      await signInWithEmailAndPassword(auth, email, password);
+      navigate("/");
+    } catch (err) {
+      setError(true);
+    }
+  };
   return (
-    <form className="contRow">
+    <form className="contRow" onSubmit={handleSubmit}>
       <div className="pane smHide">
         <img src={bg} />
         <h1>Welcome to Story Chat</h1>
@@ -19,6 +38,7 @@ const Login = () => {
             <i className="fa fa-lock"></i>
             <input type="password" placeholder="Password" />
           </div>
+          {hasError && <p className="error">Invalid Credentials</p>}
           <div className="input">
             <input type="submit" className="login" value="LOGIN" />
           </div>
@@ -27,7 +47,7 @@ const Login = () => {
             <i className="fa fa-google"></i>oogle
           </div>
           <h6>
-            Not a member yet? <span>Register</span>
+            Not a member yet? <Link to="/register">Register</Link>
           </h6>
         </div>
       </div>
