@@ -1,20 +1,31 @@
-import React, { useContext, useState } from "react";
-import { AuthContext } from "../../context/AuthContext";
-import { ChatContext } from "../../context/ChatContext";
-import { arrayUnion, doc, serverTimestamp, Timestamp, updateDoc } from "firebase/firestore";
-import { db, storage } from "../../firebase";
-import { v4 as uuid } from "uuid";
-import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
-import "./Input.css";
+import React, { useContext, useState } from 'react';
+import { AuthContext } from '../../context/AuthContext';
+import { ChatContext } from '../../context/ChatContext';
+import {
+  arrayUnion,
+  doc,
+  serverTimestamp,
+  Timestamp,
+  updateDoc,
+} from 'firebase/firestore';
+import { db, storage } from '../../firebase';
+import { v4 as uuid } from 'uuid';
+import { getDownloadURL, ref, uploadBytesResumable } from 'firebase/storage';
+import './Input.css';
 
 const Input = () => {
-  const [text, setText] = useState("");
+  const [text, setText] = useState('');
   const [img, setImg] = useState(null);
 
   const { currentUser } = useContext(AuthContext);
   const { data } = useContext(ChatContext);
 
-  const handleSend = async () => {
+  const handleSend = async (e) => {
+    e.preventDefault();
+    if (!data.chatId || !Object.keys(data.user).length) {
+      setText('No chat active');
+      return;
+    }
     if (img) {
       const storageRef = ref(storage, uuid());
 
@@ -26,7 +37,7 @@ const Input = () => {
         },
         () => {
           getDownloadURL(uploadTask.snapshot.ref).then(async (downloadURL) => {
-            await updateDoc(doc(db, "chats", data.chatId), {
+            await updateDoc(doc(db, 'chats', data.chatId), {
               messages: arrayUnion({
                 id: uuid(),
                 text,
@@ -39,7 +50,7 @@ const Input = () => {
         }
       );
     } else {
-      await updateDoc(doc(db, "chats", data.chatId), {
+      await updateDoc(doc(db, 'chats', data.chatId), {
         messages: arrayUnion({
           id: uuid(),
           text,
@@ -49,35 +60,45 @@ const Input = () => {
       });
     }
 
-    await updateDoc(doc(db, "userChats", currentUser.uid), {
-      [data.chatId + ".lastMessage"]: {
+    await updateDoc(doc(db, 'userChats', currentUser.uid), {
+      [data.chatId + '.lastMessage']: {
         text,
       },
-      [data.chatId + ".date"]: serverTimestamp(),
+      [data.chatId + '.date']: serverTimestamp(),
     });
 
-    await updateDoc(doc(db, "userChats", data.user.uid), {
-      [data.chatId + ".lastMessage"]: {
+    await updateDoc(doc(db, 'userChats', data.user.uid), {
+      [data.chatId + '.lastMessage']: {
         text,
       },
-      [data.chatId + ".date"]: serverTimestamp(),
+      [data.chatId + '.date']: serverTimestamp(),
     });
 
-    setText("");
+    setText('');
     setImg(null);
   };
   return (
-    <div className="inputMsg">
-      <input type="text" placeholder="Type something..." onChange={(e) => setText(e.target.value)} value={text} />
+    <form className="inputMsg" onSubmit={handleSend}>
+      <input
+        type="text"
+        placeholder="Type something..."
+        onChange={(e) => setText(e.target.value)}
+        value={text}
+      />
       <div className="send">
         <i className="fa fa-paperclip"></i>
-        <input type="file" style={{ display: "none" }} id="file" onChange={(e) => setImg(e.target.files[0])} />
+        <input
+          type="file"
+          style={{ display: 'none' }}
+          id="file"
+          onChange={(e) => setImg(e.target.files[0])}
+        />
         <label htmlFor="file">
           <i className="fa fa-image"></i>
         </label>
-        <button onClick={handleSend}>Send</button>
+        <input class="submit" type="submit" value="send" />
       </div>
-    </div>
+    </form>
   );
 };
 

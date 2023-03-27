@@ -27,7 +27,7 @@
   cursor: pointer;
 }
 
-.inputMsg .send button {
+.inputMsg .send .submit {
   border: none;
   padding: 10px 15px;
   color: white;
