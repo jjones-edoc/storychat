@@ -1,14 +1,14 @@
 import React, { useContext, useState } from "react";
 import { collection, query, where, getDocs, setDoc, doc, updateDoc, serverTimestamp, getDoc } from "firebase/firestore";
 import { db } from "../../firebase";
-import { AuthContext } from "../../context/AuthContext";
+import { ProjContext } from "../../context/ProjContext";
 import "./Search.css";
 const Search = () => {
   const [username, setUsername] = useState("");
   const [user, setUser] = useState(null);
   const [err, setErr] = useState(false);
 
-  const { currentUser } = useContext(AuthContext);
+  const { currentUser } = useContext(ProjContext);
 
   const handleSearch = async () => {
     const q = query(collection(db, "users"), where("displayName", "==", username));

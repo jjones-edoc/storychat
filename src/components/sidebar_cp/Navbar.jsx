@@ -2,10 +2,10 @@ import React, { useContext } from "react";
 import "./Navbar.css";
 import { signOut } from "firebase/auth";
 import { auth } from "../../firebase";
-import { AuthContext } from "../../context/AuthContext";
+import { ProjContext } from "../../context/ProjContext";
 
 const Navbar = () => {
-  const { currentUser } = useContext(AuthContext);
+  const { currentUser } = useContext(ProjContext);
 
   return (
     <div className="navbar">

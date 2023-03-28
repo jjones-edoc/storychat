@@ -1,11 +1,11 @@
 import React, { useContext } from "react";
 import "./Chat.css";
-import { ChatContext } from "../context/ChatContext";
+import { ProjContext } from "../context/ProjContext";
 import Messages from "./chat_cp/Messages";
 import Input from "./chat_cp/Input";
 
 const Chat = () => {
-  const { data } = useContext(ChatContext);
+  const { data } = useContext(ProjContext);
   return (
     <div className="chat">
       <div className="chatInfo">
