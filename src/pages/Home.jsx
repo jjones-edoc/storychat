@@ -1,8 +1,8 @@
-import React from 'react';
-import Sidebar from '../components/Sidebar';
-import Chat from '../components/Chat';
-import Nav from '../components/Nav';
-import AIChat from '../components/AIChat';
+import React from "react";
+import Sidebar from "../components/Sidebar";
+import Chat from "../components/Chat";
+import Nav from "../components/Nav";
+import AIChat from "../components/AIChat";
 
 const Home = () => {
   return (
@@ -10,9 +10,9 @@ const Home = () => {
       <div className="row h-100">
         <Nav />
         <AIChat />
+        {/* <Sidebar />
+        <Chat /> */}
       </div>
-      {/* <Sidebar />
-      <Chat /> */}
     </div>
   );
 };

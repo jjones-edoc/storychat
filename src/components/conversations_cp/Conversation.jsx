@@ -1,15 +1,13 @@
-const Conversation = ({
-  conversation,
-  selectedConversationId,
-  selectConversation,
-}) => {
+const Conversation = ({ conversation }) => {
   const { id, name, messages } = conversation;
-  const selected = selectedConversationId === id;
-  const classNames = `conversation ${selected ? 'selected' : ''}`;
+
   return (
-    <div className={classNames} onClick={() => selectConversation(id)}>
-      <div className="name">{name}</div>
-      <div className="messages">{messages.length}</div>
+    <div className="row mb-3">
+      <span className="cursor text-white">
+        {/* add font awesome icon with chat bubble */}
+        <i className="fa fa-comment pt-2 me-2"></i>
+        {name}
+      </span>
     </div>
   );
 };

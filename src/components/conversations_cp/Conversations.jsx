@@ -1,18 +1,9 @@
-import Conversation from './Conversation';
-const Conversations = ({
-  conversations,
-  selectedConversationId,
-  selectConversation,
-}) => {
+import Conversation from "./Conversation";
+const Conversations = ({ conversations, selectedConversationId, selectConversation }) => {
   return (
-    <div className="row">
+    <div className="row overflow-auto">
       {conversations.map((conversation) => (
-        <Conversation
-          key={conversation.id}
-          conversation={conversation}
-          selectedConversationId={selectedConversationId}
-          selectConversation={selectConversation}
-        />
+        <Conversation conversation={conversation} />
       ))}
     </div>
   );
